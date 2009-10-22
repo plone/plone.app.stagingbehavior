@@ -26,6 +26,10 @@ setup(name='plone.stagingbehavior',
           'setuptools',
           'plone.app.dexterity',
           'plone.app.iterate',
+          'plone.relations',
+          'plone.locking',
+          'plone.app.intid',
+          'z3c.relationfield',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

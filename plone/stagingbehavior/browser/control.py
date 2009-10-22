@@ -1,101 +1,90 @@
 
-#from AccessControl import getSecurityManager
-#from Products.Five.browser import BrowserView
-#from Products.Archetypes.interfaces import IReferenceable
-#import Products.CMFCore.permissions
-
-#from plone.app.iterate.relation import WorkingCopyRelation
-#from plone.app.iterate import permissions
-
-from five import grok
+from AccessControl import getSecurityManager
 from Acquisition import aq_inner
-
-from z3c.relationfield.interfaces import IHasRelations
-
-from plone.memoize.view import memoize
 
 from plone.app.iterate import interfaces
 from plone.app.iterate.browser import control
+from plone.memoize.instance import memoize
+import Products.CMFCore.permissions
 
-from plone.stagingbehavior.interfaces import IStagingSupport
+from plone.stagingbehavior.utils import get_baseline, get_working_copy, get_checkout_relation
 
 class Control(control.Control):
     """Information about whether iterate can operate.
     
     This is a public view, referenced in action condition expressions.
     """
-    
-    def get_original(self, context):
-        # XXX
-        raise NotImplemented
-        if IReferenceable.providedBy(context):
-            refs = context.getRefs(WorkingCopyRelation.relationship)
-            if refs:
-                return refs[0]
+
 
     def checkin_allowed(self):
-        """Check if a checkin is allowed
+        """ Check if a checkin is allowed.
+            Conditions:
+            - provides IIterateAware
+            - is not baseline
+            - is the working copy
+            - is versionable
+            - user should have ModifyPortalContent permission
         """
-        context = aq_inner(self.context)
+        context = aq_inner( self.context )
 
-        if not IHasRelations.providedBy(context):
+        if not interfaces.IIterateAware.providedBy( context ):
             return False
-        # XXX
-        return True
-        raise NotImplemented
+
+        if context == get_baseline( context ):
+            return False
+
+        if context != get_working_copy( context ):
+            return False
+
+        archiver = interfaces.IObjectArchiver(context)
+        if not archiver.isVersionable():
+            return False
+
         checkPermission = getSecurityManager().checkPermission
-        
-        if not interfaces.IIterateAware.providedBy(context):
-            return False
-    
-        archiver = interfaces.IObjectArchiver(context)
-        if not archiver.isVersionable():
-            return False
-
-        original = self.get_original(context)
-        if original is None:
-            return False
-
         if not checkPermission(
-            Products.CMFCore.permissions.ModifyPortalContent, original):
+                Products.CMFCore.permissions.ModifyPortalContent, context):
             return False
-        
+
         return True
         
-    def checkout_allowed(self):
-        """Check if a checkout is allowed.
-        """
-        context = aq_inner(self.context)
 
-        if not IHasRelations.providedBy(context):
+    def checkout_allowed(self):
+        """ Check if a checkout is allowed.
+            Conditions:
+            - provides IIterateAware
+            - is versionable
+            - there is no checkout
+        """
+        context = aq_inner( self.context )
+
+        if not interfaces.IIterateAware.providedBy( context ):
             return False
-        
+
         archiver = interfaces.IObjectArchiver(context)
         if not archiver.isVersionable():
             return False
 
-        # XXX
-        return True
-        # check if there is an existing checkout
-        if len(context.getBRefs(WorkingCopyRelation.relationship)) > 0:
+        if get_checkout_relation( context ):
             return False
-        
-        # check if its is a checkout
-        if len(context.getRefs(WorkingCopyRelation.relationship)) > 0:
-            return False
-        
+
         return True
+
         
     @memoize
     def cancel_allowed(self):
-        """Check to see if the user can cancel the checkout on the
-        given working copy
+        """ Check to see if the user can cancel the checkout on the
+            given working copy.
+            Conditions:
+            - this is a working copy
+            - the baseline exists
         """
-        context = aq_inner(self.context)
+        context = aq_inner( self.context )
 
-        if not IHasRelations.providedBy(context):
+        if context != get_working_copy( context ):
             return False
+
+        if not get_baseline( context ):
+            return False
+
         return True
-        # XXX
-        raise NotImplemented
-        return self.get_original(aq_inner(self.context)) is not None
+

@@ -8,7 +8,7 @@ from zope.event import notify
 
 from plone.app import iterate
 
-from plone.stagingbehavior import STAGING_RELATION_NAME
+from plone.stagingbehavior.utils import get_relations, get_baseline
 
 class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
                                    grok.Adapter):
@@ -18,30 +18,22 @@ class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
     grok.implements( iterate.interfaces.ICheckinCheckoutPolicy )
     grok.context( iterate.interfaces.IIterateAware )
 
+
     def _get_relation_to_baseline( self ):
-        context = aq_inner( self.context ) 
-        # get id
-        intids = component.getUtility( IIntIds )
-        id = intids.getId( context )
-        # ask catalog
-        catalog = component.getUtility( ICatalog )
-        relations = list(catalog.findRelations({ 'to_id' : id }))
-        relations = filter( lambda r:r.from_attribute==STAGING_RELATION_NAME,
-                            relations )
         # do we have a baseline in our relations?
-        if relations and not len(relations) == 1:
+        relations = get_relations( self.context )
+
+        if relations and not len( relations ) == 1:
             raise iterate.interfaces.CheckinException( "Baseline count mismatch" )
 
         if not relations or not relations[0]:
             raise iterate.interfaces.CheckinException( "Baseline has disappeared" )
+
         return relations[0]
 
-    def _getBaseline( self ):
-        intids = component.getUtility( IIntIds )
-        relation = self._get_relation_to_baseline()
-        if relation:
-            baseline = intids.getObject( relation.to_id )
 
+    def _getBaseline( self ):
+        baseline = get_baseline( self.context )
         if not baseline:
             raise iterate.interfaces.CheckinException( "Baseline has disappeared" )
         return baseline

@@ -4,5 +4,9 @@ Changelog
 0.1a1
 ----------------
 
-* Initial release
+* Cleaned up the code a little bit
+  [22.10.2009, jbaumann]
+
+* First implementation
+  [21.10.2009, jbaumann]
 

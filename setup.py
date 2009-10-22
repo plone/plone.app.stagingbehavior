@@ -24,6 +24,8 @@ setup(name='plone.stagingbehavior',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.app.dexterity',
+          'plone.app.iterate',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

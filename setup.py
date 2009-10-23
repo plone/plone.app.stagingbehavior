@@ -28,7 +28,7 @@ setup(name='plone.stagingbehavior',
           'plone.app.iterate',
           'plone.relations',
           'plone.locking',
-          'plone.app.intid',
+          'zope.app.intid',
           'z3c.relationfield',
           # -*- Extra requirements: -*-
       ],

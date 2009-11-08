@@ -3,11 +3,11 @@
         xmlns:browser="http://namespaces.zope.org/browser">
 
     <browser:page
-            for="plone.stagingbehavior.interfaces.IStagingSupport"
-            name="iterate_control"
-            class=".control.Control"
-            permission="zope2.View"
-            allowed_attributes="checkin_allowed checkout_allowed cancel_allowed"
-            />
+        for="plone.stagingbehavior.interfaces.IStagingSupport"
+        name="iterate_control"
+        class=".control.Control"
+        permission="zope2.View"
+        allowed_attributes="checkin_allowed checkout_allowed cancel_allowed"
+        />
 
 </configure>

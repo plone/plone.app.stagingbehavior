@@ -11,10 +11,10 @@
     <grok:grok package="." />
 
     <plone:behavior
-            title="Staging"
-            description="Enable staging with plone.app.iterate for dexterity contents"
-            provides="plone.stagingbehavior.interfaces.IStagingSupport"
-            for="plone.dexterity.interfaces.IDexterityContent"
-            />
+        title="Staging"
+        description="Enable staging with plone.app.iterate for dexterity contents"
+        provides="plone.stagingbehavior.interfaces.IStagingSupport"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        />
 
 </configure>

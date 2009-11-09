@@ -4,6 +4,9 @@ Changelog
 0.1a1
 ----------------
 
+* Implemented simple checkin process, which just copies all field values.
+  [09.11.2009, jbaumann]
+
 * Cleaned up the code a little bit
   [22.10.2009, jbaumann]
 

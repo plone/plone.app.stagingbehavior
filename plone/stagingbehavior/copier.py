@@ -3,6 +3,7 @@ from Acquisition import aq_inner, aq_parent, aq_base
 from five import grok
 from zope import component
 from zope.app.intid.interfaces import IIntIds
+from zope.schema import getFieldsInOrder
 from z3c.relationfield import event
 from zc.relation.interfaces import ICatalog
 from ZODB.PersistentMapping import PersistentMapping
@@ -10,6 +11,7 @@ from ZODB.PersistentMapping import PersistentMapping
 from plone.app.iterate import copier
 from plone.app.iterate import interfaces
 from plone.relations.relationships import Z2Relationship as Relationship
+from plone.dexterity.utils import iterSchemata
 from Products.CMFCore.utils import getToolByName
 from Products.DCWorkflow.DCWorkflow import DCWorkflowDefinition
 
@@ -40,11 +42,11 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
 
         # delete the working copy reference to the baseline
         wc_ref = self._deleteWorkingCopyRelation()
-        
-        # reassemble references on the new baseline         
+
+        # reassemble references on the new baseline
         self._handleReferences( baseline, self.context, "checkin", wc_ref )
 
-        # move the working copy to the baseline container, deleting the baseline 
+        # move the working copy to the baseline container, deleting the baseline
         new_baseline = self._replaceBaseline( baseline )
 
         # patch the working copy with baseline info not preserved during checkout
@@ -53,33 +55,25 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         return new_baseline
 
     def _replaceBaseline( self, baseline ):
-        # move the working copy object to the baseline, returns the new baseline
-        baseline_id = baseline.getId()
-        
-        # delete the baseline from the folder to make room for the committed working copy
-        baseline_container = aq_parent( aq_inner( baseline ) )
-        baseline_container._delOb( baseline_id )
+        wc_id = self.context.getId()
+        wc_container = aq_parent( self.context )
 
-        # delete the working copy from the its container
-        wc_container =  aq_parent( aq_inner( self.context ) )
+        # copy all field values from the working copy to the baseline
+        for schema in iterSchemata( baseline ):
+            for name, field in getFieldsInOrder( schema ):
+                try:
+                    value = field.get( schema( self.context ) )
+                except:
+                    value = None
+                field.set( baseline, value )
+        baseline.processForm()
+        # delete the working copy
 
-        # trick out the at machinery to not delete references
-        self.context._v_cp_refs = 1
-        self.context._v_is_cp = 0
-        
-        wc_container.manage_delObjects( [self.context.getId()] )
-        
-        # move the working copy back to the baseline container
-        working_copy = aq_base( self.context )
-        working_copy.id = baseline_id
-        baseline_container._setOb( baseline_id, working_copy )
-
-        new_baseline = baseline_container._getOb( baseline_id )
-        
-        return new_baseline
+        wc_container._delObject( wc_id )
+        return baseline
 
     def _reassembleWorkingCopy( self, new_baseline, baseline ):
-        # reattach the source's workflow history, try avoid a dangling ref 
+        # reattach the source's workflow history, try avoid a dangling ref
         try:
             new_baseline.workflow_history = PersistentMapping( baseline.workflow_history.items() )
         except AttributeError:
@@ -108,7 +102,6 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
 
     def _handleReferences( self, baseline, wc, mode, wc_ref ):
         pass
-        # XXX : not implemented yet
 
     def _deleteWorkingCopyRelation( self ):
         # delete the wc reference keeping a reference to it for its annotations
@@ -117,7 +110,7 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         return relation
 
     def _get_relation_to_baseline( self ):
-        context = aq_inner( self.context ) 
+        context = aq_inner( self.context )
         # get id
         intids = component.getUtility( IIntIds )
         id = intids.getId( context )
@@ -154,7 +147,7 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                                             baseline,
                                             relation,
                                             checkin_message
-        ) )
+                                            ) )
         # merge the object back to the baseline with a copier
         copier = component.queryAdapter( self.context,
                                          iterate.interfaces.IObjectCopier )

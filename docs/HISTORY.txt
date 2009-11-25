@@ -4,6 +4,9 @@ Changelog
 0.1a1
 ----------------
 
+* Fixed AttributeError processForm in checkin.
+  [25.11.2009, jbaumann]
+
 * Implemented simple checkin process, which just copies all field values.
   [09.11.2009, jbaumann]
 

@@ -1,4 +1,5 @@
 
+
 from Acquisition import aq_inner, aq_parent, aq_base
 from five import grok
 from zope import component
@@ -66,7 +67,7 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                 except:
                     value = None
                 field.set( baseline, value )
-        baseline.processForm()
+        baseline.reindexObject()
         # delete the working copy
 
         wc_container._delObject( wc_id )

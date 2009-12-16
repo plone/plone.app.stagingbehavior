@@ -4,6 +4,9 @@ Changelog
 0.1a1
 ----------------
 
+* Added creator attribute to the StagingRelationValue
+  [16.12.2009, jbaumann]
+
 * Fixed AttributeError processForm in checkin.
   [25.11.2009, jbaumann]
 

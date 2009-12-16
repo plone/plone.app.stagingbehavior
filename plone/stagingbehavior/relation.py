@@ -8,6 +8,9 @@ from zope.component import getUtility
 
 from z3c.relationfield import relation
 
+from Products.CMFCore.interfaces import ISiteRoot
+from Products.CMFCore.utils import getToolByName
+
 from plone.stagingbehavior.interfaces import IStagingRelationValue
 
 class StagingRelationValue(relation.RelationValue):
@@ -35,3 +38,7 @@ class StagingRelationValue(relation.RelationValue):
     def __init__(self, to_id):
         super(StagingRelationValue, self).__init__(to_id)
         self.staging_properties = PersistentDict()
+        # remember the creator
+        portal = getUtility(ISiteRoot)
+        mstool = getToolByName(portal, 'portal_membership')
+        self.creator = mstool.getAuthenticatedMember().getId()

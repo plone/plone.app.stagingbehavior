@@ -1,24 +1,24 @@
-
-
-from Acquisition import aq_inner, aq_parent, aq_base
+from Acquisition import aq_inner, aq_parent
+from ZODB.PersistentMapping import PersistentMapping
 from five import grok
-from zope import component
-from zope.app.intid.interfaces import IIntIds
-from zope.schema import getFieldsInOrder
 from z3c.relationfield import event
 from zc.relation.interfaces import ICatalog
-from ZODB.PersistentMapping import PersistentMapping
+from zope import component
+from zope.app.intid.interfaces import IIntIds
+from zope.event import notify
+from zope.schema import getFieldsInOrder
 
-from plone.app.iterate import copier
-from plone.app.iterate import interfaces
-from plone.relations.relationships import Z2Relationship as Relationship
-from plone.dexterity.utils import iterSchemata
 from Products.CMFCore.utils import getToolByName
 from Products.DCWorkflow.DCWorkflow import DCWorkflowDefinition
+from plone.app.iterate import copier
+from plone.app.iterate import interfaces
+from plone.app.iterate.event import AfterCheckinEvent
+from plone.dexterity.utils import iterSchemata
 
+from plone.stagingbehavior import STAGING_RELATION_NAME
 from plone.stagingbehavior.interfaces import IStagingSupport
 from plone.stagingbehavior.relation import StagingRelationValue
-from plone.stagingbehavior import STAGING_RELATION_NAME
+
 
 class ContentCopier( copier.ContentCopier, grok.Adapter ):
     grok.implements( interfaces.IObjectCopier )
@@ -30,7 +30,6 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         # get id of objects
         intids = component.getUtility( IIntIds )
         wc_id = intids.getId( wc )
-        context_id = intids.getId( self.context )
         # create a relation
         relation = StagingRelationValue( wc_id )
         event._setRelation( context, STAGING_RELATION_NAME, relation )
@@ -88,17 +87,6 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
             if not isinstance( wf, DCWorkflowDefinition ):
                 continue
             wf.updateRoleMappingsFor( new_baseline )
-
-        # reattach the source's uid, this will update wc refs to point back to the new baseline
-        # XXX
-        #new_baseline._setUID( baseline.UID() )
-
-        # reattach the source's history id, to get the previous version ancestry
-        # XXX
-        histid_handler = getToolByName( self.context, 'portal_historyidhandler')
-        #huid = histid_handler.getUid( baseline )
-        #histid_handler.setUid( new_baseline, huid, check_uniqueness=False )
-
         return new_baseline
 
     def _handleReferences( self, baseline, wc, mode, wc_ref ):
@@ -122,10 +110,10 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                             relations )
         # do we have a baseline in our relations?
         if relations and not len(relations) == 1:
-            raise iterate.interfaces.CheckinException( "Baseline count mismatch" )
+            raise interfaces.CheckinException( "Baseline count mismatch" )
 
         if not relations or not relations[0]:
-            raise iterate.interfaces.CheckinException( "Baseline has disappeared" )
+            raise interfaces.CheckinException( "Baseline has disappeared" )
         return relations[0]
 
     def _getBaseline( self ):
@@ -135,7 +123,7 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
             baseline = intids.getObject( relation.from_id )
 
         if not baseline:
-            raise iterate.interfaces.CheckinException( "Baseline has disappeared" )
+            raise interfaces.CheckinException( "Baseline has disappeared" )
         return baseline
 
     def checkin( self, checkin_message ):
@@ -144,16 +132,16 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         # get a hold of the relation object
         relation = self._get_relation_to_baseline()
         # publish the event for subscribers, early because contexts are about to be manipulated
-        notify( iterate.event.CheckinEvent( self.context,
-                                            baseline,
-                                            relation,
-                                            checkin_message
-                                            ) )
+        notify(event.CheckinEvent(self.context,
+                                  baseline,
+                                  relation,
+                                  checkin_message
+                                  ))
         # merge the object back to the baseline with a copier
-        copier = component.queryAdapter( self.context,
-                                         iterate.interfaces.IObjectCopier )
+        copier = component.queryAdapter(self.context,
+                                         interfaces.IObjectCopier)
         new_baseline = copier.merge()
         # don't need to unlock the lock disappears with old baseline deletion
-        notify( iterate.event.AfterCheckinEvent( new_baseline, checkin_message ) )
+        notify(AfterCheckinEvent(new_baseline, checkin_message))
         return new_baseline
 

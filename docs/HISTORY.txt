@@ -1,8 +1,12 @@
 Changelog
 =========
 
+
 0.1a1
 ----------------
+
+* Removed dependency to plone.relations, made some cleanups
+  [26.07.2010, jbaumann]
 
 * Added creator attribute to the StagingRelationValue
   [16.12.2009, jbaumann]

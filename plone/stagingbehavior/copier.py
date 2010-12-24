@@ -65,11 +65,21 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                     value = field.get( schema( self.context ) )
                 except:
                     value = None
-                field.set( baseline, value )
-        baseline.reindexObject()
-        # delete the working copy
 
+                # TODO: We need a way to identify the DCFieldProperty
+                # fields and use the appropriate set_name/get_name
+                if name == 'effective':
+                    baseline.effective_date = self.context.effective()
+                elif name == 'expires':
+                    baseline.expiration_date = self.context.expires()
+                else:
+                    field.set( baseline, value )
+
+        baseline.reindexObject()
+
+        # delete the working copy
         wc_container._delObject( wc_id )
+
         return baseline
 
     def _reassembleWorkingCopy( self, new_baseline, baseline ):

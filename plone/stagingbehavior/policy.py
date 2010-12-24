@@ -6,8 +6,8 @@ from zope import component
 from zope.app.intid.interfaces import IIntIds
 from zope.event import notify
 
-from plone import dexterity
 from plone.app import iterate
+from plone.stagingbehavior.interfaces import IStagingSupport
 
 from plone.stagingbehavior.utils import get_relations, get_baseline
 
@@ -17,7 +17,7 @@ class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
     Dexterity Checkin Checkout Policy
     """
     grok.implements( iterate.interfaces.ICheckinCheckoutPolicy )
-    grok.context( iterate.interfaces.IIterateAware )
+    grok.context( IStagingSupport )
 
     def _get_relation_to_baseline( self ):
         # do we have a baseline in our relations?

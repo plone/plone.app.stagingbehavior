@@ -17,8 +17,7 @@ class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
     Dexterity Checkin Checkout Policy
     """
     grok.implements( iterate.interfaces.ICheckinCheckoutPolicy )
-    grok.context( dexterity.interfaces.IDexterityContent )
-    grok.adapts( iterate.interfaces.IIterateAware )
+    grok.context( iterate.interfaces.IIterateAware )
 
     def _get_relation_to_baseline( self ):
         # do we have a baseline in our relations?

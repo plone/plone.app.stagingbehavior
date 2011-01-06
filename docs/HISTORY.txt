@@ -6,7 +6,7 @@ Changelog
 ------------------
 
 * Made sure to fire an IAfterCheckinEvent so that the iterate
-  locking handler (handleAfterCheckin) removes the lock from the
+  locking handler (handleCheckin) removes the lock from the
   baseline object.
   [06.01.2011, deo]
 

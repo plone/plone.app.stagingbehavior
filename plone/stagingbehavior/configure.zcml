@@ -19,7 +19,7 @@
 
     <subscriber
        for="plone.app.iterate.interfaces.IAfterCheckinEvent"
-       handler="plone.app.iterate.subscribers.locking.handleAfterCheckin"
+       handler="plone.app.iterate.subscribers.locking.handleCheckin"
        />
 
 </configure>

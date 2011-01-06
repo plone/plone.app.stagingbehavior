@@ -2,8 +2,21 @@ Changelog
 =========
 
 
-0.1a1
-----------------
+0.1a1 (Unreleased)
+------------------
+
+* Made sure to fire an IAfterCheckinEvent so that the iterate
+  locking handler (handleAfterCheckin) removes the lock from the
+  baseline object.
+  [06.01.2011, deo]
+
+* Added a workaround to allow the checkin operation to succeed.
+  Sent message to the mailing list to discuss the issue.
+  [24.12.2010, deo]
+
+* Fixed to only use the plone.stagingbehavior policy for Dexterity
+  content, avoiding any interference with Archetypes content.
+  [24.12.2010, deo]
 
 * Removed dependency to plone.relations, made some cleanups
   [26.07.2010, jbaumann]

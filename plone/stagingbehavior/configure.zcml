@@ -17,4 +17,9 @@
         for="plone.dexterity.interfaces.IDexterityContent"
         />
 
+    <subscriber
+       for="plone.app.iterate.interfaces.IAfterCheckinEvent"
+       handler="plone.app.iterate.subscribers.locking.handleAfterCheckin"
+       />
+
 </configure>

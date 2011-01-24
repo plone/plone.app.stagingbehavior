@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.1a1 (Unreleased)
+0.1a1 (2010-01-24)
 ------------------
 
 * Renamed package to plone.app.stagingbehavior.

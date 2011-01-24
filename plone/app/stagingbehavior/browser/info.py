@@ -1,4 +1,3 @@
-
 from five import grok
 
 from plone.app.iterate.browser import info
@@ -8,8 +7,11 @@ from plone.app.layout.viewlets.interfaces import IAboveContent
 from plone.memoize.instance import memoize
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.stagingbehavior.interfaces import IStagingSupport
-from plone.stagingbehavior.utils import get_baseline, get_working_copy, get_checkout_relation
+
+from plone.app.stagingbehavior.utils import get_baseline
+from plone.app.stagingbehavior.utils import get_working_copy
+from plone.app.stagingbehavior.utils import get_checkout_relation
+from plone.app.stagingbehavior.interfaces import IStagingSupport
 
 
 class BaselineInfoViewlet( info.BaselineInfoViewlet, grok.Viewlet ):
@@ -28,7 +30,6 @@ class BaselineInfoViewlet( info.BaselineInfoViewlet, grok.Viewlet ):
 
     def _getReference( self ):
         return get_checkout_relation( self.context )
-
 
     @memoize
     def working_copy( self ):
@@ -57,8 +58,6 @@ class BaselineInfoViewlet( info.BaselineInfoViewlet, grok.Viewlet ):
             return None
 
 
-
-
 class CheckoutInfoViewlet( info.CheckoutInfoViewlet, grok.Viewlet ):
     grok.name( 'plone.app.iterate.checkout_info' )
     grok.viewletmanager( IAboveContent )
@@ -66,21 +65,17 @@ class CheckoutInfoViewlet( info.CheckoutInfoViewlet, grok.Viewlet ):
     grok.context( IStagingSupport )
     grok.implements( IViewView )
 
-
     def render(self):
         if IWorkingCopy.providedBy(self.context):
             return info.CheckoutInfoViewlet.render(self)
         return ''
 
-
     def _getReference( self ):
         return get_checkout_relation( self.context )
-
 
     @memoize
     def baseline( self ):
         return get_baseline( self.context )
-
 
     @property
     @memoize
@@ -90,4 +85,3 @@ class CheckoutInfoViewlet( info.CheckoutInfoViewlet, grok.Viewlet ):
             return relation.staging_properties
         else:
             return None
-

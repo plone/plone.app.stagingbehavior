@@ -5,34 +5,36 @@ Changelog
 0.1a1 (Unreleased)
 ------------------
 
+* Renamed package to plone.app.stagingbehavior.
+  [deo]
+
 * Made sure to fire an IAfterCheckinEvent so that the iterate
   locking handler (handleCheckin) removes the lock from the
   baseline object.
-  [06.01.2011, deo]
+  [deo]
 
 * Added a workaround to allow the checkin operation to succeed.
   Sent message to the mailing list to discuss the issue.
-  [24.12.2010, deo]
+  [deo]
 
-* Fixed to only use the plone.stagingbehavior policy for Dexterity
+* Fixed to only use the plone.app.stagingbehavior policy for Dexterity
   content, avoiding any interference with Archetypes content.
-  [24.12.2010, deo]
+  [deo]
 
-* Removed dependency to plone.relations, made some cleanups
-  [26.07.2010, jbaumann]
+* Removed dependency to plone.relations, made some cleanups.
+  [jbaumann]
 
-* Added creator attribute to the StagingRelationValue
-  [16.12.2009, jbaumann]
+* Added creator attribute to the StagingRelationValue.
+  [jbaumann]
 
 * Fixed AttributeError processForm in checkin.
-  [25.11.2009, jbaumann]
+  [jbaumann]
 
 * Implemented simple checkin process, which just copies all field values.
-  [09.11.2009, jbaumann]
+  [jbaumann]
 
-* Cleaned up the code a little bit
-  [22.10.2009, jbaumann]
+* Cleaned up the code a little bit.
+  [jbaumann]
 
-* First implementation
-  [21.10.2009, jbaumann]
-
+* First implementation.
+  [jbaumann]

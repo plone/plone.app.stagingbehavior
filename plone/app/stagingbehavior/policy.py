@@ -1,4 +1,3 @@
-
 from Acquisition import aq_inner
 from five import grok
 from zc.relation.interfaces import ICatalog
@@ -7,9 +6,10 @@ from zope.app.intid.interfaces import IIntIds
 from zope.event import notify
 
 from plone.app import iterate
-from plone.stagingbehavior.interfaces import IStagingSupport
+from plone.app.stagingbehavior.utils import get_baseline
+from plone.app.stagingbehavior.utils import get_relations
+from plone.app.stagingbehavior.interfaces import IStagingSupport
 
-from plone.stagingbehavior.utils import get_relations, get_baseline
 
 class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
                                    grok.Adapter):
@@ -30,7 +30,6 @@ class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
             raise iterate.interfaces.CheckinException( "Baseline has disappeared" )
 
         return relations[0]
-
 
     def _getBaseline( self ):
         baseline = get_baseline( self.context )
@@ -56,4 +55,3 @@ class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
         # don't need to unlock the lock disappears with old baseline deletion
         notify( iterate.event.AfterCheckinEvent( new_baseline, checkin_message ) )
         return new_baseline
-

@@ -1,10 +1,8 @@
-
-from z3c.relationfield.interfaces import IRelationValue
 from zope.interface import Attribute
+from z3c.relationfield.interfaces import IRelationValue
 
-from plone.app.iterate.interfaces import IIterateAware
 from plone.locking.interfaces import ITTWLockable
-
+from plone.app.iterate.interfaces import IIterateAware
 
 
 class IStagingSupport(IIterateAware, ITTWLockable):
@@ -12,10 +10,7 @@ class IStagingSupport(IIterateAware, ITTWLockable):
     """
 
 
-
-
 class IStagingRelationValue(IRelationValue):
     """
     """
     staging_properties = Attribute('Staging information')
-

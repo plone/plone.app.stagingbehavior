@@ -3,7 +3,7 @@ import os
 
 version = '0.1a1'
 
-setup(name='plone.stagingbehavior',
+setup(name='plone.app.stagingbehavior',
       version=version,
       description="Provides a behavior for using plone.app.iterate with dexterity content types",
       long_description=open("README.txt").read() + "\n" +

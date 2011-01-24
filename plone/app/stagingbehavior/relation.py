@@ -1,17 +1,17 @@
-
 from persistent.dict import PersistentDict
 from zc.relation.interfaces import ICatalog
 from zope.app.intid.interfaces import IIntIds
 from zope.interface import implements
-from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.component import getUtility
+from zope.annotation.interfaces import IAttributeAnnotatable
 
 from z3c.relationfield import relation
 
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 
-from plone.stagingbehavior.interfaces import IStagingRelationValue
+from plone.app.stagingbehavior.interfaces import IStagingRelationValue
+
 
 class StagingRelationValue(relation.RelationValue):
     implements(IStagingRelationValue, IAttributeAnnotatable)

@@ -15,9 +15,9 @@ from plone.app.iterate import interfaces
 from plone.app.iterate.event import AfterCheckinEvent
 from plone.dexterity.utils import iterSchemata
 
-from plone.stagingbehavior import STAGING_RELATION_NAME
-from plone.stagingbehavior.interfaces import IStagingSupport
-from plone.stagingbehavior.relation import StagingRelationValue
+from plone.app.stagingbehavior import STAGING_RELATION_NAME
+from plone.app.stagingbehavior.interfaces import IStagingSupport
+from plone.app.stagingbehavior.relation import StagingRelationValue
 
 
 class ContentCopier( copier.ContentCopier, grok.Adapter ):
@@ -154,4 +154,3 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         # don't need to unlock the lock disappears with old baseline deletion
         notify(AfterCheckinEvent(new_baseline, checkin_message))
         return new_baseline
-

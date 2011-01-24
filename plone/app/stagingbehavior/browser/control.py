@@ -1,20 +1,21 @@
-
-from AccessControl import getSecurityManager
 from Acquisition import aq_inner
+from AccessControl import getSecurityManager
 
 from plone.app.iterate import interfaces
 from plone.app.iterate.browser import control
 from plone.memoize.instance import memoize
-import Products.CMFCore.permissions
+from Products.CMFCore.permissions import ModifyPortalContent
 
-from plone.stagingbehavior.utils import get_baseline, get_working_copy, get_checkout_relation
+from plone.app.stagingbehavior.utils import get_baseline
+from plone.app.stagingbehavior.utils import get_working_copy
+from plone.app.stagingbehavior.utils import get_checkout_relation
+
 
 class Control(control.Control):
     """Information about whether iterate can operate.
-    
+
     This is a public view, referenced in action condition expressions.
     """
-
 
     def checkin_allowed(self):
         """ Check if a checkin is allowed.
@@ -41,12 +42,10 @@ class Control(control.Control):
             return False
 
         checkPermission = getSecurityManager().checkPermission
-        if not checkPermission(
-                Products.CMFCore.permissions.ModifyPortalContent, context):
+        if not checkPermission(ModifyPortalContent, context):
             return False
 
         return True
-        
 
     def checkout_allowed(self):
         """ Check if a checkout is allowed.
@@ -69,7 +68,6 @@ class Control(control.Control):
 
         return True
 
-        
     @memoize
     def cancel_allowed(self):
         """ Check to see if the user can cancel the checkout on the
@@ -87,4 +85,3 @@ class Control(control.Control):
             return False
 
         return True
-

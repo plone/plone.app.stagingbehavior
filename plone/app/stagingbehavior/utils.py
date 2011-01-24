@@ -1,13 +1,12 @@
-
 from Acquisition import aq_inner
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.app.intid.interfaces import IIntIds
 
-from plone.stagingbehavior import STAGING_RELATION_NAME
+from plone.app.stagingbehavior import STAGING_RELATION_NAME
 
 def get_relations( context ):
-    context = aq_inner( context ) 
+    context = aq_inner( context )
     # get id
     intids = component.getUtility( IIntIds )
     id = intids.getId( context )
@@ -42,4 +41,3 @@ def get_working_copy( context ):
         intids = component.getUtility( IIntIds )
         return intids.getObject( relation.to_id )
     return None
-

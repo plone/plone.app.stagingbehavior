@@ -3,7 +3,7 @@
         xmlns:browser="http://namespaces.zope.org/browser">
 
     <browser:page
-        for="plone.stagingbehavior.interfaces.IStagingSupport"
+        for="plone.app.stagingbehavior.interfaces.IStagingSupport"
         name="iterate_control"
         class=".control.Control"
         permission="zope2.View"

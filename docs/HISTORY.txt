@@ -4,8 +4,11 @@ Changelog
 0.1a2 (Unreleased)
 ------------------
 
+* Fixed to avoid try setting values on read-only fields.
+  [deo]
 
-0.1a1 (2010-01-24)
+
+0.1a1 (2011-01-24)
 ------------------
 
 * Renamed package to plone.app.stagingbehavior.

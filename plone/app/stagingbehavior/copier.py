@@ -61,6 +61,9 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         # copy all field values from the working copy to the baseline
         for schema in iterSchemata( baseline ):
             for name, field in getFieldsInOrder( schema ):
+                # Skip read-only fields
+                if field.readonly:
+                    continue
                 try:
                     value = field.get( schema( self.context ) )
                 except:

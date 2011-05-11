@@ -26,7 +26,7 @@ In your *profiles/default/types/YOURTYPE.xml* add the behavior::
     </object>
 
 
-The IStagingSupport behavior just adds the refered staging support to your
+The IStagingSupport behavior just adds the referred staging support to your
 content-type, but it does not enable it.
 
 You have to set the "versioning" option in the Plone types control panel

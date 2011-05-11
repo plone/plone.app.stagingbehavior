@@ -24,12 +24,18 @@ setup(name='plone.app.stagingbehavior',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.CMFPlone',
           'plone.app.dexterity',
           'plone.app.iterate',
+          'plone.app.versioningbehavior',
+          'plone.app.referenceablebehavior',
           'plone.locking',
           'z3c.relationfield',
           # -*- Extra requirements: -*-
       ],
+      extras_require = {
+        'test':  ['plone.app.testing'],
+      },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]

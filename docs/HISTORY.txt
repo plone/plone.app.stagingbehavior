@@ -4,6 +4,8 @@ Changelog
 0.1a3 (Unreleased)
 ------------------
 
+* Add functional tests.
+  [anthonygerrard, davisagli]
 
 0.1a2 (2011-01-25)
 ------------------

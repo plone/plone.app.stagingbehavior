@@ -1,0 +1,80 @@
+Staging behavior
+======================
+
+A Dexterity content type is created by our textfixture profile.
+
+If we access the site as an admin TTW::
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(layer['app'])
+    >>> browser.handleErrors = False
+    >>> portal = layer['portal']
+    >>> portal_url = 'http://nohost/plone'
+    >>> from plone.app.testing.interfaces import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+    >>> browser.addHeader('Authorization', 'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD))
+
+We can see this type in the addable types at the root of the site::
+
+    >>> browser.open(portal_url)
+    >>> browser.open(portal_url + "/folder_factories")
+    >>> browser.contents
+    '...stageable_type...'
+    >>> browser.getControl("Stageable Type").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.IDublinCore.title").value = "My Object"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/stageable_type/view'
+
+Checkout
+
+    >>> browser.getLink(id='iterate_checkout').click()
+    >>> browser.contents
+    '...This is a working copy of ...My Object..., made by...admin... on ...'
+    
+Cancel checkout
+
+    >>> browser.getLink(id='iterate_checkout_cancel').click()
+    >>> browser.contents
+    '...Cancel check-out of...My Object...'
+    >>> browser.getControl(name='form.button.Cancel').click()
+    >>> browser.url
+    'http://nohost/plone/stageable_type'
+    
+Test inside a folder
+--------------------
+
+    >>> browser.open(portal_url + "/folder_factories")
+    >>> browser.contents
+    '...test_folder...'
+    >>> browser.getControl("Test Folder").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.IDublinCore.title").value = "My Folder"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/test_folder/view'
+
+    >>> browser.open("http://nohost/plone/test_folder/folder_factories")
+    >>> browser.contents
+    '...stageable_type...'
+    >>> browser.getControl("Stageable Type").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl(name="form.widgets.IDublinCore.title").value = "My Sub-object"
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url
+    'http://nohost/plone/test_folder/stageable_type/view'
+
+Checkout
+
+    >>> browser.getLink(id='iterate_checkout').click()
+    >>> browser.contents
+    '...This is a working copy of ...My Sub-object..., made by...admin... on ...'
+    
+Cancel checkout
+
+    >>> browser.getLink(id='iterate_checkout_cancel').click()
+    >>> browser.contents
+    '...Cancel check-out of...My Sub-object...'
+    >>> browser.getControl(name='form.button.Cancel').click()
+    >>> browser.url
+    'http://nohost/plone/test_folder/stageable_type'

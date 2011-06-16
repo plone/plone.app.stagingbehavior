@@ -1,5 +1,5 @@
 Staging behavior
-======================
+================
 
 A Dexterity content type is created by our textfixture profile.
 
@@ -15,7 +15,6 @@ If we access the site as an admin TTW::
 
 We can see this type in the addable types at the root of the site::
 
-    >>> browser.open(portal_url)
     >>> browser.open(portal_url + "/folder_factories")
     >>> browser.contents
     '...stageable_type...'
@@ -30,7 +29,7 @@ Checkout
 
     >>> browser.getLink(id='iterate_checkout').click()
     >>> browser.contents
-    '...This is a working copy of ...My Object..., made by...admin... on ...'
+    '...This is a working copy of...My Object..., made by...admin... on...'
     
 Cancel checkout
 
@@ -68,7 +67,7 @@ Checkout
 
     >>> browser.getLink(id='iterate_checkout').click()
     >>> browser.contents
-    '...This is a working copy of ...My Sub-object..., made by...admin... on ...'
+    '...This is a working copy of...My Sub-object..., made by...admin... on...'
     
 Cancel checkout
 

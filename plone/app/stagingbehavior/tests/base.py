@@ -1,19 +1,17 @@
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting, FunctionalTesting
-from plone.app.testing import applyProfile
-from zope.configuration import xmlconfig
+
 
 class Fixture(PloneSandboxLayer):
-    default_bases = (PLONE_FIXTURE,)
+    defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         import plone.app.stagingbehavior
-        xmlconfig.include(configurationContext, 'configure.zcml', plone.app.stagingbehavior)
-        configurationContext.execute_actions()
+        self.loadZCML(package=plone.app.stagingbehavior)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'plone.app.stagingbehavior:testfixture')
+        self.applyProfile(portal, 'plone.app.stagingbehavior:testfixture')
 
 
 FIXTURE = Fixture()

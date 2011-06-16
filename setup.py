@@ -29,6 +29,7 @@ setup(name='plone.app.stagingbehavior',
           'plone.app.iterate',
           'plone.app.versioningbehavior',
           'plone.app.referenceablebehavior',
+          'plone.app.relationfield',
           'plone.locking',
           'z3c.relationfield',
           # -*- Extra requirements: -*-

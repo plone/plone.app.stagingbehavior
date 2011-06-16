@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1 (unreleased)
+----------------
+
+* Declare the implicit dependency on plone.app.relationfield.
+  [davisagli]
+
 0.1b1 (2011-05-20)
 ------------------
 

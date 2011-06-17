@@ -27,15 +27,17 @@ setup(name='plone.app.stagingbehavior',
           'Products.CMFPlone',
           'plone.app.dexterity',
           'plone.app.iterate',
-          'plone.app.versioningbehavior',
-          'plone.app.referenceablebehavior',
           'plone.app.relationfield',
           'plone.locking',
           'z3c.relationfield',
           # -*- Extra requirements: -*-
       ],
       extras_require = {
-        'test':  ['plone.app.testing'],
+        'test':  [
+            'plone.app.testing'
+            'plone.app.versioningbehavior',
+            'plone.app.referenceablebehavior'
+            ],
       },
       entry_points="""
       # -*- Entry points: -*-

@@ -1,8 +1,12 @@
 Changelog
 =========
 
-0.1 (unreleased)
-----------------
+0.1b2 (unreleased)
+------------------
+
+* Declare plone.app.versioningbehavior and plone.app.referenceablebehavior
+  as test dependencies.
+  [danjacka, davisagli]
 
 * Declare the implicit dependency on plone.app.relationfield.
   [davisagli]

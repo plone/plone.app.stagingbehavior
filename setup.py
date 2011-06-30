@@ -34,7 +34,7 @@ setup(name='plone.app.stagingbehavior',
       ],
       extras_require = {
         'test':  [
-            'plone.app.testing'
+            'plone.app.testing',
             'plone.app.versioningbehavior',
             'plone.app.referenceablebehavior'
             ],

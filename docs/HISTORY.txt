@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1 (unreleased)
+----------------
+
+* Fix broken dependency declaration.
+  [danjacka, jonstahl]
+
 0.1b2 (2011-06-16)
 ------------------
 

@@ -75,6 +75,8 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                     baseline.effective_date = self.context.effective()
                 elif name == 'expires':
                     baseline.expiration_date = self.context.expires()
+                elif name == 'subjects':
+                    baseline.setSubject(self.context.Subject())
                 else:
                     field.set( baseline, value )
 

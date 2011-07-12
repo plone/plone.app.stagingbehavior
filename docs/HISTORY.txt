@@ -4,6 +4,10 @@ Changelog
 0.1 (unreleased)
 ----------------
 
+* Make sure that changes to the subjects field are carried over when the
+  working copy is checked in.
+  [swampmonkey]
+
 * Fix broken dependency declaration.
   [danjacka, jonstahl]
 

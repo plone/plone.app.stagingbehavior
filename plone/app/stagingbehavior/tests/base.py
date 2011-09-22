@@ -8,7 +8,9 @@ class Fixture(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         import plone.app.stagingbehavior
+        import plone.app.versioningbehavior
         self.loadZCML(package=plone.app.stagingbehavior)
+        self.loadZCML(package=plone.app.versioningbehavior)
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.stagingbehavior:testfixture')

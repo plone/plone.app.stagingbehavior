@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1 (unreleased)
-----------------
+0.1b3 (2011-09-24)
+------------------
 
 * Make sure that changes to the subjects field are carried over when the
   working copy is checked in.

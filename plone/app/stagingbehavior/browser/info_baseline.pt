@@ -1,6 +1,7 @@
 <dl class="portalMessage info"
-     tal:define="working_copy view/working_copy;"
-     i18n:domain="plone">
+     tal:define="working_copy view/working_copy; isAnon context/@@plone_portal_state/anonymous;"
+     i18n:domain="plone"
+     tal:condition="python: not isAnon">
 
     <dt i18n:translate="label_locked">Locked</dt>
     <dd>

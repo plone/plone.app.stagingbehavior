@@ -6,7 +6,7 @@
         for="plone.app.stagingbehavior.interfaces.IStagingSupport"
         name="iterate_control"
         class=".control.Control"
-        permission="zope2.View"
+        permission="cmf.ModifyPortalContent"
         allowed_attributes="checkin_allowed checkout_allowed cancel_allowed"
         />
 

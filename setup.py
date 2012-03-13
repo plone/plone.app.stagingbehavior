@@ -36,7 +36,8 @@ setup(name='plone.app.stagingbehavior',
         'test':  [
             'plone.app.testing',
             'plone.app.versioningbehavior',
-            'plone.app.referenceablebehavior'
+            'plone.app.referenceablebehavior',
+            'Products.CMFPlacefulWorkflow',
             ],
       },
       entry_points="""

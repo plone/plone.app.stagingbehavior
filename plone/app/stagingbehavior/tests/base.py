@@ -2,6 +2,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting, FunctionalTesting
 
+from plone.testing import z2
 
 class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
@@ -9,8 +10,11 @@ class Fixture(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         import plone.app.stagingbehavior
         import plone.app.versioningbehavior
+        import Products.CMFPlacefulWorkflow
         self.loadZCML(package=plone.app.stagingbehavior)
         self.loadZCML(package=plone.app.versioningbehavior)
+        self.loadZCML(package=Products.CMFPlacefulWorkflow)
+        z2.installProduct(app, 'Products.CMFPlacefulWorkflow')
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.stagingbehavior:testfixture')

@@ -4,5 +4,6 @@
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-plone.app.relationfield:default</dependency>
     <dependency>profile-plone.app.iterate:plone.app.iterate</dependency>
+    <dependency>profile-Products.CMFPlacefulWorkflow:base</dependency>
   </dependencies>
 </metadata>

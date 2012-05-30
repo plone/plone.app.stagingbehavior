@@ -4,6 +4,10 @@ Changelog
 0.1 (unreleased)
 ----------------
 
+* Fix KeyError when accessing previously checked in content through Acquisition
+  wrapper
+  http://code.google.com/p/dexterity/issues/detail?id=270
+  [anthonygerrard]
 
 0.1b3 (2011-09-24)
 ------------------

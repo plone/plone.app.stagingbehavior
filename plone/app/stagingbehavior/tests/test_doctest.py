@@ -10,6 +10,8 @@ def test_suite():
     suite.addTests([
         layered(doctest.DocFileSuite('../stagingbehavior.txt', optionflags = doctest.ELLIPSIS), 
                 layer = FUNCTIONAL_TESTING),
+        layered(doctest.DocFileSuite('regressiontests.txt', optionflags = doctest.ELLIPSIS), 
+                layer = FUNCTIONAL_TESTING),
     ])
     return suite
 

@@ -112,3 +112,10 @@ Checkout
     '...This is a working copy of...My workflow test..., made by...admin... on...'
     >>> browser.contents
     '...state-draft-copy...'
+
+Check security permisions on workflow have been applied.  We remove copy or move permissions in our
+workflow so this should not appear in the action menu.    
+http://code.google.com/p/dexterity/issues/detail?id=258    
+
+    >>> 'copy_of_stageable_type-1/object_copy' in browser.contents
+    False

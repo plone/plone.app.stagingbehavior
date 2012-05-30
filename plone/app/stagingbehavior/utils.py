@@ -1,4 +1,4 @@
-from Acquisition import aq_inner
+from Acquisition import aq_inner, aq_base
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.app.intid.interfaces import IIntIds
@@ -9,7 +9,7 @@ def get_relations( context ):
     context = aq_inner( context )
     # get id
     intids = component.getUtility( IIntIds )
-    id = intids.getId( context )
+    id = intids.getId(aq_base(context))
     # ask catalog
     catalog = component.getUtility( ICatalog )
     relations = list(catalog.findRelations({ 'to_id' : id }))

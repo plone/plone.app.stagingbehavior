@@ -4,6 +4,9 @@ Changelog
 0.1 (unreleased)
 ----------------
 
+- Copy annotations from working copy to baseline checkin.
+  [frapell, jone]
+
 * Fix KeyError when accessing previously checked in content through Acquisition
   wrapper
   http://code.google.com/p/dexterity/issues/detail?id=270

@@ -4,6 +4,7 @@ from five import grok
 from z3c.relationfield import event
 from zc.relation.interfaces import ICatalog
 from zope import component
+from zope.annotation.interfaces import IAnnotations
 from zope.app.intid.interfaces import IIntIds
 from zope.event import notify
 from zope.schema import getFieldsInOrder
@@ -81,6 +82,13 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                     field.set( baseline, value )
 
         baseline.reindexObject()
+
+        # copy annotations
+        wc_annotations = IAnnotations(self.context)
+        baseline_annotations = IAnnotations(baseline)
+
+        baseline_annotations.clear()
+        baseline_annotations.update(wc_annotations)
 
         # delete the working copy
         wc_container._delObject( wc_id )

@@ -4,13 +4,16 @@ Changelog
 0.1 (unreleased)
 ----------------
 
-- Copy annotations from working copy to baseline checkin.
+* Copy annotations from working copy to baseline checkin.
   [frapell, jone]
 
 * Fix KeyError when accessing previously checked in content through Acquisition
   wrapper
   http://code.google.com/p/dexterity/issues/detail?id=270
   [anthonygerrard]
+
+* Hide the 'locked' status message if user is anonymous
+  [mattvoss]
 
 0.1b3 (2011-09-24)
 ------------------

@@ -4,8 +4,10 @@ Changelog
 0.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- use `index` instead of `template` for info viewlet to allow overriding the 
+  template with zcml registrations (sync approach with that used in 
+  p.a.iterate)
+  [cewing]
 
 0.1b4 (2012-08-20)
 ------------------

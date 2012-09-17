@@ -21,11 +21,11 @@ class BaselineInfoViewlet( info.BaselineInfoViewlet, grok.Viewlet ):
     grok.context( IStagingSupport )
     grok.implements( IViewView )
 
-    template = ViewPageTemplateFile('info_baseline.pt')
+    index = ViewPageTemplateFile('info_baseline.pt')
 
     def render(self):
         if IBaseline.providedBy(self.context) and self.working_copy() is not None:
-            return self.template()
+            return self.index()
         return ''
 
     def _getReference( self ):

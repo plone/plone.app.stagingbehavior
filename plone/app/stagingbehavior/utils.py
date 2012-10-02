@@ -9,7 +9,11 @@ def get_relations( context ):
     context = aq_inner( context )
     # get id
     intids = component.getUtility( IIntIds )
-    id = intids.getId(aq_base(context))
+    id = intids.queryId(aq_base(context))
+    if not id:
+        # for objects without intid or
+        # objects being deleted in the current transaction return empty list
+        return []
     # ask catalog
     catalog = component.getUtility( ICatalog )
     relations = list(catalog.findRelations({ 'to_id' : id }))

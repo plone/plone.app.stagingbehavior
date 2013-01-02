@@ -30,7 +30,7 @@ Checkout
     >>> browser.getLink(id='iterate_checkout').click()
     >>> browser.contents
     '...This is a working copy of...My Object..., made by...admin... on...'
-    
+
 Cancel checkout
 
     >>> browser.getLink(id='iterate_checkout_cancel').click()
@@ -39,7 +39,7 @@ Cancel checkout
     >>> browser.getControl(name='form.button.Cancel').click()
     >>> browser.url
     'http://nohost/plone/stageable_type'
-    
+
 Test inside a folder
 --------------------
 
@@ -68,7 +68,7 @@ Checkout
     >>> browser.getLink(id='iterate_checkout').click()
     >>> browser.contents
     '...This is a working copy of...My Sub-object..., made by...admin... on...'
-    
+
 Cancel checkout
 
     >>> browser.getLink(id='iterate_checkout_cancel').click()
@@ -77,11 +77,11 @@ Cancel checkout
     >>> browser.getControl(name='form.button.Cancel').click()
     >>> browser.url
     'http://nohost/plone/test_folder/stageable_type'
-    
+
 Working copy workflows
 ----------------------
 
-It's possible to assign a different workflow to working copies in combination with 
+It's possible to assign a different workflow to working copies in combination with
 Products.CMFPlacefulWorkflow.  This usually makes sense: you should be checking in a working copy
 rather than publishing it.
 
@@ -92,7 +92,7 @@ couple of site properties.
     >>> browser.getControl(name="enable_checkout_workflow:boolean").value = [True]
     >>> browser.getControl(name="checkout_workflow_policy:string").value = 'working-copy'
     >>> browser.getControl(name="manage_editProperties:method").click()
-    
+
 Create a new page to test workflows with
 
     >>> browser.open("http://nohost/plone/test_folder/folder_factories")
@@ -114,8 +114,8 @@ Checkout
     '...state-draft-copy...'
 
 Check security permisions on workflow have been applied.  We remove copy or move permissions in our
-workflow so this should not appear in the action menu.    
-http://code.google.com/p/dexterity/issues/detail?id=258    
+workflow so this should not appear in the action menu.
+http://code.google.com/p/dexterity/issues/detail?id=258
 
     >>> 'copy_of_stageable_type-1/object_copy' in browser.contents
     False

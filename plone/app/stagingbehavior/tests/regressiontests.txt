@@ -16,7 +16,7 @@ If we access the site as an admin TTW::
 KeyError with aquisition wrapper
 =========================================
 
-When an item provides IBaseline (has been checked in at least once) and it is accessed through an 
+When an item provides IBaseline (has been checked in at least once) and it is accessed through an
 Aquisition wrapper you get a KeyError from zope.intid, originating from five.intid.
 
     >>> browser.open(portal_url + "/folder_factories")
@@ -38,13 +38,13 @@ Aquisition wrapper you get a KeyError from zope.intid, originating from five.int
     >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url
     'http://nohost/plone/test_folder/stageable_type/view'
-    
+
 Checkout
 
     >>> browser.getLink(id="iterate_checkout").click()
     >>> browser.contents
     '...This is a working copy of...My Sub-object..., made by...admin... on...'
-    
+
 Checkin
 
     >>> browser.getLink(id="iterate_checkin").click()
@@ -53,7 +53,7 @@ Checkin
     >>> browser.getControl(name="form.button.Checkin").click()
     >>> browser.url
     'http://nohost/plone/test_folder/stageable_type'
-    
+
 Test can view through Aquisition wrapper (repeating test_folder is deliberate here)
 
     >>> browser.open("http://nohost/plone/test_folder/test_folder/stageable_type")

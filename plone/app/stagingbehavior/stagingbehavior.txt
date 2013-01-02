@@ -27,13 +27,13 @@ We can see this type in the addable types at the root of the site::
 
 Checkout
 
-    >>> browser.getLink(id='iterate_checkout').click()
+    >>> browser.getLink("Check out").click()
     >>> browser.contents
     '...This is a working copy of...My Object..., made by...admin... on...'
 
 Cancel checkout
 
-    >>> browser.getLink(id='iterate_checkout_cancel').click()
+    >>> browser.getLink("Cancel check-out").click()
     >>> browser.contents
     '...Cancel check-out of...My Object...'
     >>> browser.getControl(name='form.button.Cancel').click()
@@ -65,13 +65,13 @@ Test inside a folder
 
 Checkout
 
-    >>> browser.getLink(id='iterate_checkout').click()
+    >>> browser.getLink("Check out").click()
     >>> browser.contents
     '...This is a working copy of...My Sub-object..., made by...admin... on...'
 
 Cancel checkout
 
-    >>> browser.getLink(id='iterate_checkout_cancel').click()
+    >>> browser.getLink("Cancel check-out").click()
     >>> browser.contents
     '...Cancel check-out of...My Sub-object...'
     >>> browser.getControl(name='form.button.Cancel').click()
@@ -107,7 +107,7 @@ Create a new page to test workflows with
 
 Checkout
 
-    >>> browser.getLink(id='iterate_checkout').click()
+    >>> browser.getLink("Check out").click()
     >>> browser.contents
     '...This is a working copy of...My workflow test..., made by...admin... on...'
     >>> browser.contents

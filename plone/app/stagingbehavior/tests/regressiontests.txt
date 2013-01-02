@@ -41,13 +41,13 @@ Aquisition wrapper you get a KeyError from zope.intid, originating from five.int
 
 Checkout
 
-    >>> browser.getLink(id="iterate_checkout").click()
+    >>> browser.getLink("Check out").click()
     >>> browser.contents
     '...This is a working copy of...My Sub-object..., made by...admin... on...'
 
 Checkin
 
-    >>> browser.getLink(id="iterate_checkin").click()
+    >>> browser.getLink("Check in").click()
     >>> browser.contents
     '...Check in...'
     >>> browser.getControl(name="form.button.Checkin").click()

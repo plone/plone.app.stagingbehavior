@@ -52,6 +52,7 @@ class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
         copier = component.queryAdapter( self.context,
                                          iterate.interfaces.IObjectCopier )
         new_baseline = copier.merge()
+
         # don't need to unlock the lock disappears with old baseline deletion
         notify( iterate.event.AfterCheckinEvent( new_baseline, checkin_message ) )
         return new_baseline

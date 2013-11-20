@@ -4,8 +4,14 @@ Changelog
 0.1 (unreleased)
 ----------------
 
-* use `index` instead of `template` for info viewlet to allow overriding the 
-  template with zcml registrations (sync approach with that used in 
+* Add subscribers to manage relation between WC and baseline
+  [gborelli]
+
+* Store relation between Working copy and its baseline
+  [gborelli]
+
+* use `index` instead of `template` for info viewlet to allow overriding the
+  template with zcml registrations (sync approach with that used in
   p.a.iterate)
   [cewing]
 

@@ -4,6 +4,10 @@ Changelog
 0.1 (unreleased)
 ----------------
 
+* Change checkin_allowed control according to p.app.iterate.
+  User can perform a checkin when he can modify baseline content
+  [gborelli]
+
 * Add subscribers to manage relation between WC and baseline
   [gborelli]
 

@@ -25,13 +25,15 @@ class Control(control.Control):
             - is the working copy
             - is versionable
             - user should have ModifyPortalContent permission
+              on baseline
         """
         context = aq_inner( self.context )
 
         if not interfaces.IIterateAware.providedBy( context ):
             return False
 
-        if context == get_baseline( context ):
+        baseline = get_baseline( context )
+        if context == baseline:
             return False
 
         if context != get_working_copy( context ):
@@ -42,7 +44,7 @@ class Control(control.Control):
             return False
 
         checkPermission = getSecurityManager().checkPermission
-        if not checkPermission(ModifyPortalContent, context):
+        if not checkPermission(ModifyPortalContent, baseline):
             return False
 
         return True

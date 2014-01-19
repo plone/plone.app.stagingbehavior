@@ -25,7 +25,7 @@ setup(name='plone.app.stagingbehavior',
       install_requires=[
           'setuptools',
           'Products.CMFPlone',
-          'plone.app.dexterity',
+          'plone.app.dexterity [grok]',
           'plone.app.iterate',
           'plone.app.relationfield',
           'plone.locking',

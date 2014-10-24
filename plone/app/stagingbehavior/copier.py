@@ -17,6 +17,7 @@ from plone.app.iterate.event import AfterCheckinEvent
 from plone.dexterity.utils import iterSchemata
 
 from plone.app.stagingbehavior import STAGING_RELATION_NAME
+from plone.app.stagingbehavior.interfaces import IWCAnnotator
 from plone.app.stagingbehavior.interfaces import IStagingSupport
 from plone.app.stagingbehavior.relation import StagingRelationValue
 
@@ -113,7 +114,9 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
         return new_baseline
 
     def _handleReferences( self, baseline, wc, mode, wc_ref ):
-        pass
+        storage = IWCAnnotator(baseline, None)
+        if storage:
+            storage.set_relation(wc_ref)
 
     def _deleteWorkingCopyRelation( self ):
         # delete the wc reference keeping a reference to it for its annotations

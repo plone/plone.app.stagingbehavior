@@ -1,6 +1,6 @@
 <configure
         xmlns="http://namespaces.zope.org/zope"
-        xmlns:genericsetup="http://namespaces.zope.org/genericsetup"    
+        xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
         xmlns:grok="http://namespaces.zope.org/grok"
         xmlns:plone="http://namespaces.plone.org/plone">
 
@@ -22,7 +22,25 @@
        for="plone.app.iterate.interfaces.IAfterCheckinEvent"
        handler="plone.app.iterate.subscribers.locking.handleCheckin"
        />
-       
+
+
+    <subscriber
+       for="plone.app.iterate.interfaces.ICancelCheckoutEvent"
+       handler=".subscribers.handleCancelCheckout"
+       />
+
+
+    <subscriber
+       for="plone.app.iterate.interfaces.IBaseline
+            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+       handler=".subscribers.updateRelations"
+       />
+
+
+    <adapter
+      for="plone.dexterity.interfaces.IDexterityContent"
+      provides=".relation.IWCAnnotator"
+      factory=".relation.WCAnnotator" />
 
     <genericsetup:registerProfile
         name="testfixture"
@@ -31,6 +49,6 @@
         description="Extension profile to configure a test fixture"
         for="Products.CMFPlone.interfaces.ITestCasePloneSiteRoot"
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        />       
+        />
 
 </configure>

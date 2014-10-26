@@ -1,5 +1,6 @@
 <configure
         xmlns="http://namespaces.zope.org/zope"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
         xmlns:genericsetup="http://namespaces.zope.org/genericsetup"    
         xmlns:grok="http://namespaces.zope.org/grok"
         xmlns:plone="http://namespaces.plone.org/plone">
@@ -23,6 +24,17 @@
        handler="plone.app.iterate.subscribers.locking.handleCheckin"
        />
        
+
+    <genericsetup:registerProfile
+        zcml:condition="installed plone.app.contenttypes"
+        name="plone.app.contenttypes"
+        title="Iterate/Staging support for Dexterity core content types"
+        description="Enable plone.app.iterate for plone.app.contenttypes by
+                     adding the staging behavior from plone.app.stagingbehavior
+                     to the core content types."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
 
     <genericsetup:registerProfile
         name="testfixture"

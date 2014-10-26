@@ -4,7 +4,9 @@ Changelog
 0.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Enable plone.app.iterate for plone.app.contenttypes by adding the staging
+  behavior to the core content types.
+  [rpatterson]
 
 
 0.1 (2014-10-20)

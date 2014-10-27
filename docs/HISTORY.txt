@@ -4,6 +4,10 @@ Changelog
 0.1.1 (unreleased)
 ------------------
 
+- Don't copy the checkout's/copy's id on checkin.  Fixes broken behavior with
+  plone.app.contenttypes or any other content type with an 'id' field.
+  [rpatterson]
+
 - Enable plone.app.iterate for plone.app.contenttypes by adding the staging
   behavior to the core content types.
   [rpatterson]

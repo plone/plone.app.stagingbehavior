@@ -65,6 +65,8 @@ class ContentCopier( copier.ContentCopier, grok.Adapter ):
                 # Skip read-only fields
                 if field.readonly:
                     continue
+                if field.__name__ == 'id':
+                    continue
                 try:
                     value = field.get( schema( self.context ) )
                 except:

@@ -10,4 +10,20 @@
         allowed_attributes="checkin_allowed checkout_allowed cancel_allowed"
         />
 
+    <browser:viewlet
+        for="plone.app.stagingbehavior.interfaces.IStagingSupport"
+        name="plone.app.iterate.baseline_info"
+        class=".info.BaselineInfoViewlet"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        view="plone.app.layout.globals.interfaces.IViewView"         permission="zope2.View"
+        />
+
+    <browser:viewlet
+        for="plone.app.stagingbehavior.interfaces.IStagingSupport"
+        name="plone.app.iterate.checkout_info"
+        class=".info.CheckoutInfoViewlet"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        view="plone.app.layout.globals.interfaces.IViewView"         permission="zope2.View"
+        />
+
 </configure>

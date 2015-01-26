@@ -15,6 +15,7 @@ from plone.app.stagingbehavior.interfaces import IStagingSupport
 
 
 class BaselineInfoViewlet(info.BaselineInfoViewlet):
+    implements(IViewView)
 
     index = ViewPageTemplateFile('info_baseline.pt')
 
@@ -54,6 +55,7 @@ class BaselineInfoViewlet(info.BaselineInfoViewlet):
 
 
 class CheckoutInfoViewlet( info.CheckoutInfoViewlet):
+    implements(IViewView)
 
     def render(self):
         if IWorkingCopy.providedBy(self.context):

@@ -15,7 +15,7 @@
         name="plone.app.iterate.baseline_info"
         class=".info.BaselineInfoViewlet"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-        view="plone.app.layout.globals.interfaces.IViewView"         permission="zope2.View"
+        permission="zope2.View"
         />
 
     <browser:viewlet
@@ -23,7 +23,7 @@
         name="plone.app.iterate.checkout_info"
         class=".info.CheckoutInfoViewlet"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-        view="plone.app.layout.globals.interfaces.IViewView"         permission="zope2.View"
+        permission="zope2.View"
         />
 
 </configure>

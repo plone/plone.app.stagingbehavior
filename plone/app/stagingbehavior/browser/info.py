@@ -1,7 +1,6 @@
 from plone.app.iterate.browser import info
 from plone.app.iterate.interfaces import IBaseline, IWorkingCopy
 from plone.app.layout.globals.interfaces import IViewView
-from plone.app.layout.viewlets.interfaces import IAboveContent
 from plone.memoize.instance import memoize
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -11,7 +10,6 @@ from zope.interface import implements
 from plone.app.stagingbehavior.utils import get_baseline
 from plone.app.stagingbehavior.utils import get_working_copy
 from plone.app.stagingbehavior.utils import get_checkout_relation
-from plone.app.stagingbehavior.interfaces import IStagingSupport
 
 
 class BaselineInfoViewlet(info.BaselineInfoViewlet):

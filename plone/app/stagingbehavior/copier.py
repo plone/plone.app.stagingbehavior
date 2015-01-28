@@ -17,7 +17,6 @@ from plone.app.iterate.event import AfterCheckinEvent
 from plone.dexterity.utils import iterSchemata
 
 from plone.app.stagingbehavior import STAGING_RELATION_NAME
-from plone.app.stagingbehavior.interfaces import IStagingSupport
 from plone.app.stagingbehavior.relation import StagingRelationValue
 
 

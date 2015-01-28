@@ -1,14 +1,10 @@
-from Acquisition import aq_inner
-from zc.relation.interfaces import ICatalog
 from zope import component
-from zope.app.intid.interfaces import IIntIds
 from zope.event import notify
 from zope.interface import implements
 
 from plone.app import iterate
 from plone.app.stagingbehavior.utils import get_baseline
 from plone.app.stagingbehavior.utils import get_relations
-from plone.app.stagingbehavior.interfaces import IStagingSupport
 
 
 class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter):

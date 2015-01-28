@@ -1,12 +1,12 @@
 from Acquisition import aq_inner, aq_parent
 from ZODB.PersistentMapping import PersistentMapping
-from five import grok
 from z3c.relationfield import event
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.annotation.interfaces import IAnnotations
 from zope.app.intid.interfaces import IIntIds
 from zope.event import notify
+from zope.interface import implements
 from zope.schema import getFieldsInOrder
 
 from Products.CMFCore.utils import getToolByName
@@ -17,13 +17,11 @@ from plone.app.iterate.event import AfterCheckinEvent
 from plone.dexterity.utils import iterSchemata
 
 from plone.app.stagingbehavior import STAGING_RELATION_NAME
-from plone.app.stagingbehavior.interfaces import IStagingSupport
 from plone.app.stagingbehavior.relation import StagingRelationValue
 
 
-class ContentCopier( copier.ContentCopier, grok.Adapter ):
-    grok.implements( interfaces.IObjectCopier )
-    grok.context( IStagingSupport )
+class ContentCopier( copier.ContentCopier ):
+    implements(interfaces.IObjectCopier)
 
     def copyTo( self, container ):
         context = aq_inner( self.context )

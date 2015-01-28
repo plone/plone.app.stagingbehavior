@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1.1.dev0'
+version = '0.2.0.dev0'
 
 setup(name='plone.app.stagingbehavior',
       version=version,
       description="Provides a behavior for using plone.app.iterate with dexterity content types",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.rst")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
@@ -25,7 +25,7 @@ setup(name='plone.app.stagingbehavior',
       install_requires=[
           'setuptools',
           'Products.CMFPlone',
-          'plone.app.dexterity [grok]',
+          'plone.app.dexterity',
           'plone.app.iterate',
           'plone.app.relationfield',
           'plone.locking',

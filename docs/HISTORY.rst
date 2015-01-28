@@ -1,8 +1,11 @@
 Changelog
 =========
 
-0.1.1 (unreleased)
+0.2.0 (unreleased)
 ------------------
+
+- remove grok
+  [mamico]
 
 - Don't copy the checkout's/copy's id on checkin.  Fixes broken behavior with
   plone.app.contenttypes or any other content type with an 'id' field.

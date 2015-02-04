@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1.1.dev0'
+version = '0.2.0.dev0'
 
 setup(name='plone.app.stagingbehavior',
       version=version,
@@ -25,7 +25,7 @@ setup(name='plone.app.stagingbehavior',
       install_requires=[
           'setuptools',
           'Products.CMFPlone',
-          'plone.app.dexterity [grok]',
+          'plone.app.dexterity',
           'plone.app.iterate',
           'plone.app.relationfield',
           'plone.locking',

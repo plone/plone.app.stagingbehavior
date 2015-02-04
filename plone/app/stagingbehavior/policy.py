@@ -1,23 +1,17 @@
-from Acquisition import aq_inner
-from five import grok
-from zc.relation.interfaces import ICatalog
 from zope import component
-from zope.app.intid.interfaces import IIntIds
 from zope.event import notify
+from zope.interface import implements
 
 from plone.app import iterate
 from plone.app.stagingbehavior.utils import get_baseline
 from plone.app.stagingbehavior.utils import get_relations
-from plone.app.stagingbehavior.interfaces import IStagingSupport
 
 
-class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter,
-                                   grok.Adapter):
+class CheckinCheckoutPolicyAdapter(iterate.policy.CheckinCheckoutPolicyAdapter):
     """
     Dexterity Checkin Checkout Policy
     """
-    grok.implements( iterate.interfaces.ICheckinCheckoutPolicy )
-    grok.context( IStagingSupport )
+    implements(iterate.interfaces.ICheckinCheckoutPolicy)
 
     def _get_relation_to_baseline( self ):
         # do we have a baseline in our relations?

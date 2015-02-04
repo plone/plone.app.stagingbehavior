@@ -16,8 +16,8 @@ Changelog
 0.1 (2014-10-20)
 ----------------
 
-* use `index` instead of `template` for info viewlet to allow overriding the 
-  template with zcml registrations (sync approach with that used in 
+* use `index` instead of `template` for info viewlet to allow overriding the
+  template with zcml registrations (sync approach with that used in
   p.a.iterate)
   [cewing]
 

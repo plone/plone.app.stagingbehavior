@@ -1,7 +1,7 @@
 <configure
         xmlns="http://namespaces.zope.org/zope"
         xmlns:zcml="http://namespaces.zope.org/zcml"
-        xmlns:genericsetup="http://namespaces.zope.org/genericsetup"    
+        xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
         xmlns:grok="http://namespaces.zope.org/grok"
         xmlns:plone="http://namespaces.plone.org/plone">
 
@@ -23,7 +23,7 @@
        for="plone.app.iterate.interfaces.IAfterCheckinEvent"
        handler="plone.app.iterate.subscribers.locking.handleCheckin"
        />
-       
+
 
     <genericsetup:registerProfile
         zcml:condition="installed plone.app.contenttypes"
@@ -43,6 +43,6 @@
         description="Extension profile to configure a test fixture"
         for="Products.CMFPlone.interfaces.ITestCasePloneSiteRoot"
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        />       
+        />
 
 </configure>

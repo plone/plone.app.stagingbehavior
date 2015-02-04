@@ -2,15 +2,11 @@
         xmlns="http://namespaces.zope.org/zope"
         xmlns:zcml="http://namespaces.zope.org/zcml"
         xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-        xmlns:grok="http://namespaces.zope.org/grok"
         xmlns:plone="http://namespaces.plone.org/plone">
 
     <!-- Include configuration for dependencies listed in setup.py -->
     <includeDependencies package="." />
     <include package=".browser" />
-
-    <!-- Grok the package to initialise schema interfaces and content classes -->
-    <grok:grok package="." />
 
     <plone:behavior
         title="Staging"
@@ -24,6 +20,15 @@
        handler="plone.app.iterate.subscribers.locking.handleCheckin"
        />
 
+    <adapter
+       for=".interfaces.IStagingSupport"
+       factory=".copier.ContentCopier"
+       />
+
+    <adapter
+       for=".interfaces.IStagingSupport"
+       factory=".policy.CheckinCheckoutPolicyAdapter"
+       />
 
     <genericsetup:registerProfile
         zcml:condition="installed plone.app.contenttypes"

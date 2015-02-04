@@ -1,25 +1,19 @@
-from five import grok
-
 from plone.app.iterate.browser import info
 from plone.app.iterate.interfaces import IBaseline, IWorkingCopy
 from plone.app.layout.globals.interfaces import IViewView
-from plone.app.layout.viewlets.interfaces import IAboveContent
 from plone.memoize.instance import memoize
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from zope.interface import implements
+
 from plone.app.stagingbehavior.utils import get_baseline
 from plone.app.stagingbehavior.utils import get_working_copy
 from plone.app.stagingbehavior.utils import get_checkout_relation
-from plone.app.stagingbehavior.interfaces import IStagingSupport
 
 
-class BaselineInfoViewlet( info.BaselineInfoViewlet, grok.Viewlet ):
-    grok.name( 'plone.app.iterate.baseline_info' )
-    grok.viewletmanager( IAboveContent )
-    grok.require( 'zope2.View' )
-    grok.context( IStagingSupport )
-    grok.implements( IViewView )
+class BaselineInfoViewlet(info.BaselineInfoViewlet):
+    implements(IViewView)
 
     index = ViewPageTemplateFile('info_baseline.pt')
 
@@ -58,12 +52,8 @@ class BaselineInfoViewlet( info.BaselineInfoViewlet, grok.Viewlet ):
             return None
 
 
-class CheckoutInfoViewlet( info.CheckoutInfoViewlet, grok.Viewlet ):
-    grok.name( 'plone.app.iterate.checkout_info' )
-    grok.viewletmanager( IAboveContent )
-    grok.require( 'zope2.View' )
-    grok.context( IStagingSupport )
-    grok.implements( IViewView )
+class CheckoutInfoViewlet( info.CheckoutInfoViewlet):
+    implements(IViewView)
 
     def render(self):
         if IWorkingCopy.providedBy(self.context):

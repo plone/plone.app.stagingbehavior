@@ -4,7 +4,11 @@ from z3c.relationfield import event
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.annotation.interfaces import IAnnotations
-from zope.app.intid.interfaces import IIntIds
+try:
+    from zope.intid.interfaces import IIntIds
+except:
+    from zope.app.intid.interfaces import IIntIds
+
 from zope.event import notify
 from zope.interface import implements
 from zope.schema import getFieldsInOrder

@@ -1,6 +1,10 @@
 from persistent.dict import PersistentDict
 from zc.relation.interfaces import ICatalog
-from zope.app.intid.interfaces import IIntIds
+try:
+    from zope.intid.interfaces import IIntIds
+except ImportError:
+    from zope.app.intid.interfaces import IIntIds
+
 from zope.interface import implements
 from zope.component import getUtility
 from zope.annotation.interfaces import IAttributeAnnotatable

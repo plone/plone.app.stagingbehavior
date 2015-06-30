@@ -4,7 +4,9 @@ from plone.app.testing import IntegrationTesting, FunctionalTesting
 
 from plone.testing import z2
 
+
 class Fixture(PloneSandboxLayer):
+
     defaultBases = (PTC_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
@@ -25,8 +27,9 @@ FIXTURE = Fixture()
 INTEGRATION_TESTING = IntegrationTesting(
     bases=(PTC_FIXTURE,),
     name="plone.app.stagingbehavior:Integration",
-    )
+)
+
 FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(PTC_FIXTURE,),
     name="plone.app.stagingbehavior:Functional",
-    )
+)

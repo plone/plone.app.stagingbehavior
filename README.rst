@@ -5,6 +5,10 @@ The ``IStagingSupport`` behavior is used for enabling the plone.app.iterate
 functionality for Dexterity content. It allows you to perform the checkout
 and checkin operations to work on a copy of your original content.
 
+Compatibility
+-------------
+
+Plone 5's version of plone.app.iterate implements dexterity support making this package absolete. This package is only useful in Plone 4.
 
 Usage
 -----
